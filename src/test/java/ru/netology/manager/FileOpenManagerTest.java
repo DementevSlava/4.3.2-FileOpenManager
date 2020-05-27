@@ -47,7 +47,7 @@ class FileOpenManagerTest {
     @Test
     void findAllExt() {
         List<String> actual = manager.findAllExt(manager.getAllBinding());
-        List<String> expected = Arrays.asList(avi, html);
+        List<String> expected = Arrays.asList("avi", "html");
 
         assertEquals(expected, actual);
     }
