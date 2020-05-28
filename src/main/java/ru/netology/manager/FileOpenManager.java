@@ -38,13 +38,13 @@ public class FileOpenManager {
         return keys;
     }
 
-   public List findAllProg(HashMap<String, String> list) {
+    public List findAllProg(HashMap<String, String> list) {
         List<String> program = new ArrayList<>();
         for (String prog : list.values())
-            if ( prog != null) {
+            if (prog != null) {
                 program.add(prog);
             }
         Collections.sort(program);
-            return program;
+        return program;
     }
 }
