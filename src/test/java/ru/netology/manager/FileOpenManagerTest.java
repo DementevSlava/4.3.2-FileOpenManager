@@ -7,18 +7,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class FileOpenManagerTest {
-    FileOpenManager manager = new FileOpenManager();
-    String html = "html";
-    String pdf = "pdf";
-    String avi = "avi";
-    String jpg = "jpg";
-    String png = "png";
-    String fireFox = "FireFox";
-    String adobeReader = "AdobeReader";
-    String vlc = "VLC";
-    String paint = "Paint";
+    private FileOpenManager manager = new FileOpenManager();
+    private String html = "html";
+    private String pdf = "pdf";
+    private String avi = "avi";
+    private String jpg = "jpg";
+    private String png = "png";
+    private String fireFox = "FireFox";
+    private String adobeReader = "AdobeReader";
+    private String vlc = "VLC";
+    private String paint = "Paint";
 
     @BeforeEach
     void setUp() {
@@ -39,14 +40,30 @@ class FileOpenManagerTest {
     }
 
     @Test
+    void findProgNonByExt() {
+        String actual = manager.findProgByExt("mkv");
+        assertNull(actual);
+    }
+
+    @Test
     void delBinding() {
         manager.delBinding(html);
-        System.out.println(manager.getAllBinding());
+        List<String> actual = manager.findAllProg();
+        List<String> expected = Arrays.asList("VLC");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void delNonBinding() {
+        manager.delBinding("mkv");
+        List<String> actual = manager.findAllProg();
+        List<String> expected = Arrays.asList(fireFox, vlc);
+        assertEquals(expected, actual);
     }
 
     @Test
     void findAllExt() {
-        List<String> actual = manager.findAllExt(manager.getAllBinding());
+        List<String> actual = manager.findAllExt();
         List<String> expected = Arrays.asList("avi", "html");
 
         assertEquals(expected, actual);
@@ -54,7 +71,7 @@ class FileOpenManagerTest {
 
     @Test
     void findAllProg() {
-        List<String> actual = manager.findAllProg(manager.getAllBinding());
+        List<String> actual = manager.findAllProg();
         List<String> expected = Arrays.asList(fireFox, vlc);
 
         assertEquals(expected, actual);

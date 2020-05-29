@@ -28,9 +28,9 @@ public class FileOpenManager {
         }
     }
 
-    public List findAllExt(HashMap<String, String> list) {
+    public List findAllExt() {
         List<String> keys = new ArrayList<>();
-        for (Map.Entry entry : list.entrySet())
+        for (Map.Entry entry : fileManager.entrySet())
             if (entry.getValue() != null) {
                 keys.add((String) entry.getKey());
             }
@@ -38,9 +38,9 @@ public class FileOpenManager {
         return keys;
     }
 
-    public List findAllProg(HashMap<String, String> list) {
+    public List findAllProg() {
         List<String> program = new ArrayList<>();
-        for (String prog : list.values())
+        for (String prog : fileManager.values())
             if (prog != null) {
                 program.add(prog);
             }
